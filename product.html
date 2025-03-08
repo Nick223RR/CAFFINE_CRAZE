@@ -8,6 +8,7 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
+    <link rel="stylesheet" href="cart.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -79,38 +80,7 @@
     display: flex;
     align-items: center;
 }
-/* .navbar-brand {
-    font-family: "Dancing Script", cursive;
-}
-.navbar-brand:hover {
-    transform: scale(1.1);
-}
 
-.nav-link {
-    color: white;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-}
-.nav-item {
-    font-family: "Dancing Script", cursive;
-    font-optical-sizing: auto;
-    font-weight: 900;
-    font-style: normal;
-    font-size: 20px;
-}
-
-.nav-item img {
-    height: 30px;
-    width: 30px;
-    margin-right: 5px;
-}
-
-.nav-link:hover {
-    color: #FFF8DC;
-    text-decoration: underline;
-    transform: scale(1.1);
-} */
     .menu-item {
     position: relative;
     overflow: hidden;
@@ -225,8 +195,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="contact_me.html">
-                                <img src="carticon.png" alt="Cart Icon" class="navbar-icon"> Order Now
+                            <a class="nav-link" href="proceed_button.html">
+                                <div class="cart-count-badge">
+                                    <img src="carticon.png" alt="Cart Icon" class="navbar-icon"> 
+                                    Order Now
+                                    <span id="cart-count">0</span>
+                                </div>
                             </a>
                         </li>
                     </ul>
@@ -240,7 +214,7 @@
             <div class="row">
                 <!-- Loop through menu items -->
                 <div class="col-md-4 mb-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Click to explore!">
-                    <div class="menu-item">
+                    <div class="menu-item" data-id="1" data-name="Capuccino" data-price="260">
                         <img src="capuccino.jpeg" alt="Capuccino">
                         <h5>Capuccino</h5>
                         <div class="star-rating">
@@ -251,14 +225,14 @@
                         <div class="hover-description">
                             <p>A classic Italian coffee drink with espresso, steamed milk, and milk foam. Smooth and creamy texture.</p>
                             
-                            <a href="contact_me.html" class="btn btn-primary order-button">Order Now</a>
+                            <button class="btn btn-primary add-to-cart">Add to Cart</button>
                         </div>
                     </div>
                 </div>
     
                 <!-- Item 2 -->
                 <div class="col-md-4 mb-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Click to explore!">
-                    <div class="menu-item">
+                    <div class="menu-item" data-id="2" data-name="Chocolate Cappuccino" data-price="270">
                         <img src="choco_frappe.png" alt="Item 2" class="img-fluid" style="width: 100px; height: 100px;">
                         <h5>Chocolate Cappuccino</h5>
                         <div class="star-rating">
@@ -269,14 +243,13 @@
                         <div class="hover-description">
                             <p>A decadent twist on the classic cappuccino with rich chocolate flavor. Perfect for chocolate lovers.</p>
                     
-                                <a href="contact_me.html" class="btn btn-primary order-button">Order Now</a>
-            
+                            <button class="btn btn-primary add-to-cart">Add to Cart</button>
                         </div>
                     </div>
                 </div>
                 <!-- Item 3 -->
                 <div class="col-md-4 mb-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Click to explore!">
-                    <div class="menu-item">
+                    <div class="menu-item" data-id="3" data-name="Iced Hazelnut Latte" data-price="390">
                         <img src="iced_hazzelnut.jpg" alt="Item 3" class="img-fluid" style="width: 100px; height: 100px;">
                         <h5>Iced Hazelnut Latte</h5>
                         <div class="star-rating">
@@ -286,17 +259,13 @@
                         <p class="price">₹390</p>
                         <div class="hover-description">
                             <p>Refreshing iced latte with a smooth hazelnut syrup. A perfect blend of coffee and nutty sweetness.</p>
-                            <!-- <div class="star-rating">
-                                ★★★★☆
-                                <span>(4/5)</span> -->
-                                <a href="contact_me.html" class="btn btn-primary order-button">Order Now</a>
-                            <!-- </div> -->
+                            <button class="btn btn-primary add-to-cart">Add to Cart</button>
                         </div>
                     </div>
                 </div>
                 <!-- Item 4 -->
                 <div class="col-md-4 mb-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Click to explore!">
-                    <div class="menu-item">
+                    <div class="menu-item" data-id="4" data-name="Iced Caffè Mocha" data-price="340">
                         <img src="iced_mocha.jpg" alt="Item 4" class="img-fluid" style="width: 100px; height: 100px;">
                         <h5>Iced Caffè Mocha</h5>
                         <div class="star-rating">
@@ -306,17 +275,13 @@
                         <p class="price">₹340</p>
                         <div class="hover-description">
                             <p>A cool, refreshing blend of espresso, chocolate, and milk. Topped with whipped cream for extra indulgence.</p>
-                            <!-- <div class="star-rating">
-                                ★★★★☆
-                                <span>(4/5)</span>
-                            </div> -->
-                            <a href="contact_me.html" class="btn btn-primary order-button">Order Now</a>
+                            <button class="btn btn-primary add-to-cart">Add to Cart</button>
                         </div>
                     </div>
                 </div>
                 <!-- Item 5 -->
                 <div class="col-md-4 mb-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Click to explore!">
-                    <div class="menu-item">
+                    <div class="menu-item" data-id="5" data-name="Latte" data-price="280">
                         <img src="latte.jpg" alt="Item 5" class="img-fluid" style="width: 100px; height: 100px;">
                         <h5>Latte</h5>
                         <div class="star-rating">
@@ -326,17 +291,13 @@
                         <p class="price">₹280</p>
                         <div class="hover-description">
                             <p>A smooth, creamy espresso-based drink with steamed milk. Mild and comforting coffee experience.</p>
-                            <!-- <div class="star-rating">
-                                ★★★★☆
-                                <span>(4/5)</span>
-                            </div> -->
-                            <a href="contact_me.html" class="btn btn-primary order-button">Order Now</a>
+                            <button class="btn btn-primary add-to-cart">Add to Cart</button>
                         </div>
                     </div>
                 </div>
                 <!-- Item 6 -->
                 <div class="col-md-4 mb-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Click to explore!">
-                    <div class="menu-item">
+                    <div class="menu-item" data-id="6" data-name="Stardust Macchiato" data-price="490">
                         <img src="stardust.jpg" alt="Item 6" class="img-fluid" style="width: 100px; height: 100px;">
                         <h5>Stardust Macchiato</h5>
                         <div class="star-rating">
@@ -346,17 +307,13 @@
                         <p class="price">₹490</p>
                         <div class="hover-description">
                             <p>A magical macchiato with a special sparkle. Espresso marked with a touch of milk foam and edible glitter.</p>
-                            <!-- <div class="star-rating">
-                                ★★★★☆
-                                <span>(4/5)</span>
-                            </div> -->
-                            <a href="contact_me.html" class="btn btn-primary order-button">Order Now</a>
+                            <button class="btn btn-primary add-to-cart">Add to Cart</button>
                         </div>
                     </div>
                 </div>
                 <!-- Item 7 -->
                 <div class="col-md-4 mb-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Click to explore!">
-                    <div class="menu-item">
+                    <div class="menu-item" data-id="7" data-name="Mushroom Cheese Sandwich" data-price="480">
                         <img src="mushroom.jpg" alt="Item 7" class="img-fluid" style="width: 100px; height: 100px;">
                         <h5>Mushroom Cheese Sandwich</h5>
                         <div class="star-rating">
@@ -366,17 +323,13 @@
                         <p class="price">₹480</p>
                         <div class="hover-description">
                             <p>A gourmet sandwich filled with sautéed mushrooms and melted cheese on artisan bread. Rich and savory.</p>
-                            <!-- <div class="star-rating">
-                                ★★★★☆
-                                <span>(4/5)</span>
-                            </div> -->
-                            <a href="contact_me.html" class="btn btn-primary order-button">Order Now</a>
+                            <button class="btn btn-primary add-to-cart">Add to Cart</button>
                         </div>
                     </div>
                 </div>
                 <!-- Item 8 -->
                 <div class="col-md-4 mb-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Click to explore!">
-                    <div class="menu-item">
+                    <div class="menu-item" data-id="8" data-name="Basil Tomato Sandwich" data-price="390">
                         <img src="basil_tomato.jpg" alt="Item 8" class="img-fluid" style="width: 100px; height: 100px;">
                         <h5>Basil Tomato Sandwich</h5>
                         <div class="star-rating">
@@ -386,17 +339,13 @@
                         <p class="price">₹390</p>
                         <div class="hover-description">
                             <p>Fresh sandwich with ripe tomatoes, fragrant basil, and a light spread. A taste of Mediterranean freshness.</p>
-                            <!-- <div class="star-rating">
-                                ★★★★☆
-                                <span>(4/5)</span>
-                            </div> -->
-                            <a href="contact_me.html" class="btn btn-primary order-button">Order Now</a>
+                            <button class="btn btn-primary add-to-cart">Add to Cart</button>
                         </div>
                     </div>
                 </div>
                 <!-- Item 9 -->
                 <div class="col-md-4 mb-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Click to explore!">
-                    <div class="menu-item">
+                    <div class="menu-item" data-id="9" data-name="Pesto Veggie Sandwich" data-price="430">
                         <img src="pesto_sandwich.jpg" alt="Item 9" class="img-fluid" style="width: 100px; height: 100px;">
                         <h5>Pesto Veggie Sandwich</h5>
                         <div class="star-rating">
@@ -406,17 +355,13 @@
                         <p class="price">₹430</p>
                         <div class="hover-description">
                             <p>A vegetarian delight with homemade pesto, fresh vegetables, and crisp bread. Herbaceous and satisfying.</p>
-                            <!-- <div class="star-rating">
-                                ★★★★☆
-                                <span>(4/5)</span>
-                            </div> -->
-                            <a href="contact_me.html" class="btn btn-primary order-button">Order Now</a>
+                            <button class="btn btn-primary add-to-cart">Add to Cart</button>
                         </div>
                     </div>
                 </div>
                 <!-- Item 10 -->
                 <div class="col-md-4 mb-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Click to explore!">
-                    <div class="menu-item">
+                    <div class="menu-item" data-id="10" data-name="Tandoori Soya Wrap" data-price="360">
                         <img src="tandoori_soya.jpg" alt="Item 10" class="img-fluid" style="width: 100px; height: 100px;">
                         <h5>Tandoori Soya Wrap</h5>
                         <div class="star-rating">
@@ -426,17 +371,13 @@
                         <p class="price">₹360</p>
                         <div class="hover-description">
                             <p>Spicy tandoori-style soya wrapped in a soft tortilla. A perfect blend of Indian flavors and plant-based protein.</p>
-                            <!-- <div class="star-rating">
-                                ★★★★☆
-                                <span>(4/5)</span>
-                            </div> -->
-                            <a href="contact_me.html" class="btn btn-primary order-button">Order Now</a>
+                            <button class="btn btn-primary add-to-cart">Add to Cart</button>
                         </div>
                     </div>
                 </div>
                 <!-- Item 11 -->
                 <div class="col-md-4 mb-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Click to explore!">
-                    <div class="menu-item">
+                    <div class="menu-item" data-id="11" data-name="Paneer Enchilada" data-price="380">
                         <img src="paneer_enchilada.jpg" alt="Item 11" class="img-fluid" style="width: 100px; height: 100px;">
                         <h5>Paneer Enchilada</h5>
                         <div class="star-rating">
@@ -446,18 +387,14 @@
                         <p class="price">₹380</p>
                         <div class="hover-description">
                             <p>A fusion dish with paneer and Mexican-inspired enchilada sauce. Creamy, spicy, and absolutely delicious.</p>
-                            <!-- <div class="star-rating">
-                                ★★★★☆
-                                <span>(4/5)</span>
-                            </div> -->
-                            <a href="contact_me.html" class="btn btn-primary order-button">Order Now</a>
+                            <button class="btn btn-primary add-to-cart">Add to Cart</button>
                         </div>
                     </div>
                 </div>
             
               <!-- Item 12 -->
               <div class="col-md-4 mb-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Click to explore!">
-                <div class="menu-item">
+                <div class="menu-item" data-id="12" data-name="Chilli Cheese Toast" data-price="360">
                     <img src="chilli_cheese.jpg" alt="Item 12" class="img-fluid" style="width: 100px; height: 100px;">
                     <h5>Chilli Cheese Toast</h5>
                     <div class="star-rating">
@@ -466,25 +403,27 @@
                     </div>
                     <p class="price">₹360</p>
                     <div class="hover-description">
-                        <p>A vegetarian delight with homemade pesto, fresh vegetables, and crisp bread. Herbaceous and satisfying.</p>
-                        <!-- <div class="star-rating">
-                            ★★★★☆
-                            <span>(4/5)</span>
-                        </div> -->
-                        <a href="contact_me.html" class="btn btn-primary order-button">Order Now</a>
+                        <p>Crispy toast topped with spicy chili and melted cheese. A perfect savory snack with a kick.</p>
+                        <button class="btn btn-primary add-to-cart">Add to Cart</button>
                 </div>
             </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="cart.js"></script>
     <script>
-        // Tooltip Initialization
-        document.addEventListener('DOMContentLoaded', function () {
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl)
+    document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll(".add-to-cart").forEach((button) => {
+            button.addEventListener("click", (event) => {
+                const menuItem = event.target.closest(".menu-item");
+                const id = parseInt(menuItem.dataset.id);
+                const name = menuItem.dataset.name;
+                const price = parseInt(menuItem.dataset.price);
+                CartManager.addItem({ id, name, price, quantity: 1 });
+                CartManager.showNotification(`${name} added to cart!`);
             });
         });
-    </script>
+    });
+</script>
 </body>
 </html>

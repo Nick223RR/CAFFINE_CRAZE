@@ -1,0 +1,194 @@
+/* Cart Styles for Caffeine Craze */
+
+/* Cart Count Badge */
+.cart-count-badge {
+  position: relative;
+  display: inline-block;
+}
+
+#cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #ff6b6b;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* Cart Notification */
+#cart-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: rgba(120, 50, 50, 0.9);
+  color: white;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  transform: translateY(-100px);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#cart-notification.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Cart Items Display */
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  margin-bottom: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.cart-item-details {
+  flex: 1;
+}
+
+.cart-item-name {
+  font-weight: bold;
+  font-size: 18px;
+  color: #333;
+}
+
+.cart-item-price {
+  color: rgba(120, 50, 50, 0.9);
+  font-weight: bold;
+}
+
+.cart-quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cart-quantity-btn {
+  background-color: rgba(120, 50, 50, 0.9);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cart-quantity-btn:hover {
+  background-color: rgba(90, 30, 30, 0.9);
+}
+
+.cart-quantity-display {
+  width: 30px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.cart-item-remove {
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cart-item-remove:hover {
+  background-color: #e74c3c;
+}
+
+.cart-empty {
+  text-align: center;
+  padding: 30px;
+  color: #666;
+  font-style: italic;
+}
+
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  margin-top: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.cart-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.cart-action-btn {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cart-action-btn:hover {
+  transform: translateY(-2px);
+}
+
+.cart-action-btn.primary {
+  background-color: rgba(120, 50, 50, 0.9);
+  color: white;
+}
+
+.cart-action-btn.primary:hover {
+  background-color: rgba(90, 30, 30, 0.9);
+}
+
+.cart-action-btn.secondary {
+  background-color: #f8f9fa;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.cart-action-btn.secondary:hover {
+  background-color: #e9ecef;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .cart-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cart-quantity-control {
+    margin-top: 10px;
+  }
+
+  .cart-item-remove {
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  .cart-actions {
+    flex-direction: column;
+  }
+}
+

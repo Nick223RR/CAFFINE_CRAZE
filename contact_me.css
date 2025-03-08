@@ -7,8 +7,8 @@
 
 /* Body styling */
 body {
-  font-family: 'Arial', sans-serif;
-  background-image: url('background.jpg');
+  font-family: "Arial", sans-serif;
+  background-image: url("background.jpg");
   background-size: cover;
   background-position: center center;
   background-attachment: fixed;
@@ -21,7 +21,7 @@ body {
 .heading {
   text-align: center;
   margin-top: 50px;
-  font-family: 'Dancing Script', cursive;
+  font-family: "Dancing Script", cursive;
   color: #9c5a5a;
   font-size: 40px;
   font-weight: bold;
@@ -31,10 +31,10 @@ body {
 /* Fade-in animation */
 @keyframes fadeIn {
   0% {
-      opacity: 0;
+    opacity: 0;
   }
   100% {
-      opacity: 1;
+    opacity: 1;
   }
 }
 
@@ -79,7 +79,7 @@ body {
 
 /* Delivery Address Section */
 .delivery-address {
-  background-color: rgb(254, 254, 254,0.5);
+  background-color: rgb(254, 254, 254, 0.5);
   padding: 25px;
   border-radius: 10px;
   margin-bottom: 30px;
@@ -210,24 +210,25 @@ input[type="button"]:hover {
 /* Responsive Design */
 @media (max-width: 768px) {
   .heading {
-      font-size: 32px;
+    font-size: 32px;
   }
 
   .container {
-      padding: 20px;
+    padding: 20px;
   }
 
   .nav-tabs {
-      font-size: 14px;
+    font-size: 14px;
   }
 
   .form-control,
   .form-select {
-      font-size: 15px;
+    font-size: 15px;
   }
 
   input[type="button"] {
-      width: 100%;
-      font-size: 18px;
+    width: 100%;
+    font-size: 18px;
   }
 }
+
