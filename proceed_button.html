@@ -525,8 +525,17 @@
                 document.getElementById('cart-total').innerHTML;
 
             // Show checkout container
-            document.querySelector('.form-container').style.display = 'none';
-            checkoutContainer.style.display = 'block';
+        document.getElementById('back-to-cart-btn').addEventListener('click', function() {
+    // Show the shopping cart section again
+    document.querySelector('.container').style.display = 'block';
+
+    // Show the cart items container
+    document.querySelector('.form-container').style.display = 'block';
+
+    // Hide the checkout container
+    document.getElementById('checkout-container').style.display = 'none';
+});
+
         } else {
             alert('Please log in to continue to checkout.');
             window.location.href = 'spa.html';  // Redirect to login page
