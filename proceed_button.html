@@ -240,8 +240,16 @@
         </div>
     </div>
 
-    <div class="container" id="checkout-container" style="display: none;">
-        <h1 class="heading fade-in">Checkout</h1>
+<div class="container" id="checkout-container" style="display: none;">
+    <div class="cart-summary">
+        <h3>Order Summary</h3>
+        <div id="checkout-cart-summary-items"></div>
+        <hr>
+        <div id="checkout-cart-total" class="h4"></div>
+    </div>
+
+    <h1 class="heading fade-in">Checkout</h1>
+
         
         <div class="form-container fade-in">
             <div id="addressForm" class="delivery-address">
@@ -484,18 +492,24 @@
         const checkoutContainer = document.getElementById('checkout-container');
 
         checkoutBtn.addEventListener('click', function() {
-            onAuthStateChanged(auth, (user) => {
-                if (user) {
-                    // User is logged in, proceed to checkout
-                    document.querySelector('.form-container').style.display = 'none';
-                    checkoutContainer.style.display = 'block';
-                } else {
-                    // User not logged in, redirect to login page
-                    alert('Please log in to continue to checkout.');
-                    window.location.href = 'spa.html';  // Redirect to login page
-                }
-            });
-        });
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // Copy order summary from cart page to checkout page
+            document.getElementById('checkout-cart-summary-items').innerHTML =
+                document.getElementById('cart-summary-items').innerHTML;
+            document.getElementById('checkout-cart-total').innerHTML =
+                document.getElementById('cart-total').innerHTML;
+
+            // Show checkout container
+            document.querySelector('.form-container').style.display = 'none';
+            checkoutContainer.style.display = 'block';
+        } else {
+            alert('Please log in to continue to checkout.');
+            window.location.href = 'spa.html';  // Redirect to login page
+        }
+    });
+});
+
     });
 </script>
 </body>
