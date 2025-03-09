@@ -449,6 +449,46 @@
         }
     });
 </script>
+<script type="module">
+    // Import Firebase modules
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
+
+    // Firebase configuration (already included in `proceed_button.html`)
+    const firebaseConfig = {
+        apiKey: "AIzaSyAQbW8GZYx8s1TClUiG7r711piLJFtrANA",
+        authDomain: "caffinecraze-93d3f.firebaseapp.com",
+        projectId: "caffinecraze-93d3f",
+        storageBucket: "caffinecraze-93d3f.firebasestorage.app",
+        messagingSenderId: "774090459612",
+        appId: "1:774090459612:web:28aa1e5d3a3de8d393e719",
+        measurementId: "G-Z5VTH06PF5"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Event listener for checkout button
+    document.addEventListener('DOMContentLoaded', function() {
+        const checkoutBtn = document.getElementById('checkout-btn');
+        const checkoutContainer = document.getElementById('checkout-container');
+
+        checkoutBtn.addEventListener('click', function() {
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    // User is logged in, proceed to checkout
+                    document.querySelector('.form-container').style.display = 'none';
+                    checkoutContainer.style.display = 'block';
+                } else {
+                    // User not logged in, redirect to login page
+                    alert('Please log in to continue to checkout.');
+                    window.location.href = 'spa.html';  // Redirect to login page
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>
 
