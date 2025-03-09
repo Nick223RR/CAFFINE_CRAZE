@@ -76,6 +76,88 @@
         .logout-button:hover {
             background-color: #bd2130;
         }
+.container-fluid{
+            background-color: rgba(120, 50, 50, 0.9);
+        }
+.navbar-brand img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+.navbar-custom {
+    background-color: rgba(120, 50, 50, 0.9); /* Applying your RGBA color */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Navbar Items */
+.navbar-nav .nav-item .nav-link {
+    font-family: 'Arial', sans-serif; /* Clean font */
+    font-size: 1.1rem; /* Slightly larger font size */
+    color: #fff; /* White text color */
+    text-transform: uppercase; /* Uppercase for all text */
+    padding: 10px 15px; /* Padding for links */
+    transition: all 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* Hover effect */
+.navbar-nav .nav-item .nav-link:hover {
+    color: #ffffff; /* Yellow color on hover */
+    background-color: rgba(120, 50, 50, 0.7); /* Darker background on hover */
+    border-radius: 5px; /* Rounded corners */
+}
+
+/* Icon Styling */
+.navbar-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+}
+
+/* Navbar collapse button */
+.navbar-toggler-icon {
+    background-color: #fff; /* White icon for the toggle button */
+}
+
+/* Responsive adjustments for mobile view */
+@media (max-width: 768px) {
+    .navbar-nav .nav-item .nav-link {
+        font-size: 1rem; /* Slightly smaller font size on mobile */
+    }
+}
+.navbar-brand img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+.navbar-brand:hover {
+    transform: scale(1.1);
+}
+
+.nav-link {
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+    .menu-item {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.5);
+    /* background-image:url(rose.jpg); */
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 200px; /* Set a consistent height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
     </style>
 </head>
 
@@ -108,7 +190,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="profile.html">
+                        <a class="nav-link" href="spa.html">
                             <img src="usericon.png" alt="User Icon" class="navbar-icon"> My Profile
                         </a>
                     </li>
