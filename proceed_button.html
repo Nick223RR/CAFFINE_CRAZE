@@ -79,45 +79,133 @@
         .btn-secondary:hover {
             background-color: #e9ecef;
         }
+.container-fluid{
+            background-color: rgba(120, 50, 50, 0.9);
+        }
+.navbar-brand img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+.navbar-custom {
+    background-color: rgba(120, 50, 50, 0.9); /* Applying your RGBA color */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Navbar Items */
+.navbar-nav .nav-item .nav-link {
+    font-family: 'Arial', sans-serif; /* Clean font */
+    font-size: 1.1rem; /* Slightly larger font size */
+    color: #fff; /* White text color */
+    text-transform: uppercase; /* Uppercase for all text */
+    padding: 10px 15px; /* Padding for links */
+    transition: all 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* Hover effect */
+.navbar-nav .nav-item .nav-link:hover {
+    color: #ffffff; /* Yellow color on hover */
+    background-color: rgba(120, 50, 50, 0.7); /* Darker background on hover */
+    border-radius: 5px; /* Rounded corners */
+}
+
+/* Icon Styling */
+.navbar-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+}
+
+/* Navbar collapse button */
+.navbar-toggler-icon {
+    background-color: #fff; /* White icon for the toggle button */
+}
+
+/* Responsive adjustments for mobile view */
+@media (max-width: 768px) {
+    .navbar-nav .nav-item .nav-link {
+        font-size: 1rem; /* Slightly smaller font size on mobile */
+    }
+}
+.navbar-brand img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+.navbar-brand:hover {
+    transform: scale(1.1);
+}
+
+.nav-link {
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+    .menu-item {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.5);
+    /* background-image:url(rose.jpg); */
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 200px; /* Set a consistent height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
     </style>
 </head>
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-custom">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">
-                <img src="Cafe-logo.png" alt="Cafe Logo" style="border-style: groove; border-color: black; height:80px;width:80px">
-                Caffeine Craze
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">
-                            <img src="homeicon.png" alt="Home Icon" class="navbar-icon"> Home
+        <nav class="navbar navbar-expand-lg navbar-custom">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">
+                    <img src="Cafe-logo.png" alt="Cafe Logo" style="border-style: groove; border-color: black; height:80px;width:80px">
+                    Caffeine Craze
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">
+                                <img src="homeicon.png" alt="Home Icon" class="navbar-icon"> Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="product.html">
+                                <img src="menuicon.png" alt="Menu Icon" class="navbar-icon"> Menu
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="proceed_button.html">
+                                <div class="cart-count-badge">
+                                    <img src="carticon.png" alt="Cart Icon" class="navbar-icon"> 
+                                    Order Now
+                                    <span id="cart-count">0</span>
+                                </div>
+                            </a>
+                        </li>
+                         <li class="nav-item">
+                        <a class="nav-link" href="spa.html">
+                            <img src="usericon.png" alt="User Icon" class="navbar-icon"> Login
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="product.html">
-                            <img src="menuicon.png" alt="Menu Icon" class="navbar-icon"> Menu
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="proceed_button.html">
-                            <div class="cart-count-badge">
-                                <img src="carticon.png" alt="Cart Icon" class="navbar-icon"> 
-                                Order Now
-                                <span id="cart-count">0</span>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+        
+        </nav>
 
     <div class="container">
         <h1 class="heading fade-in">Your Shopping Cart</h1>
@@ -327,6 +415,40 @@
             });
         }
     </script>
+    <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-analytics.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyAQbW8GZYx8s1TClUiG7r711piLJFtrANA",
+        authDomain: "caffinecraze-93d3f.firebaseapp.com",
+        projectId: "caffinecraze-93d3f",
+        storageBucket: "caffinecraze-93d3f.firebasestorage.app",
+        messagingSenderId: "774090459612",
+        appId: "1:774090459612:web:28aa1e5d3a3de8d393e719",
+        measurementId: "G-Z5VTH06PF5"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
+
+    // Check authentication state
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // User is signed in, update UI accordingly
+            const loginLink = document.querySelector('.navbar-nav .nav-item:last-child .nav-link');
+            if (loginLink) {
+                loginLink.textContent = ' My Profile';
+                loginLink.href = 'profile.html';
+            }
+        }
+    });
+</script>
 </body>
 </html>
 
