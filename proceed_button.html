@@ -170,6 +170,22 @@
   max-width: 1000px; /* Reduced max-width */
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
+.checkout-container .row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.checkout-cart-summary {
+    position: sticky;
+    top: 80px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    max-width: 100%;
+}
+
     </style>
 </head>
 
@@ -241,17 +257,11 @@
     </div>
 
 <div class="container" id="checkout-container" style="display: none;">
-    <div class="cart-summary">
-        <h3>Order Summary</h3>
-        <div id="checkout-cart-summary-items"></div>
-        <hr>
-        <div id="checkout-cart-total" class="h4"></div>
-    </div>
 
-    <h1 class="heading fade-in">Checkout</h1>
-
-        
+<div class="row">
+    <div class="col-md-8">
         <div class="form-container fade-in">
+            <h1 class="heading fade-in">Checkout</h1>
             <div id="addressForm" class="delivery-address">
                 <h3>Delivery Address</h3>
                 <div class="address-type-selector">
@@ -312,6 +322,18 @@
             </div>
         </div>
     </div>
+    
+    <!-- Order Summary on the Right -->
+    <div class="col-md-4">
+        <div id="checkout-cart-summary" class="cart-summary">
+            <h3>Order Summary</h3>
+            <div id="checkout-cart-summary-items"></div>
+            <hr>
+            <div id="checkout-cart-total" class="h4"></div>
+        </div>
+    </div>
+</div>
+
 
     <script src="cart.js"></script>
     <script>
@@ -494,6 +516,8 @@
         checkoutBtn.addEventListener('click', function() {
     onAuthStateChanged(auth, (user) => {
         if (user) {
+            // Hide Shopping Cart Section
+        document.querySelector('.container').style.display = 'none';
             // Copy order summary from cart page to checkout page
             document.getElementById('checkout-cart-summary-items').innerHTML =
                 document.getElementById('cart-summary-items').innerHTML;
