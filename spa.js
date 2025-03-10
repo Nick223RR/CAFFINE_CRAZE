@@ -254,13 +254,46 @@ document.addEventListener("DOMContentLoaded", () => {
         return updateProfile(user, {
           displayName: `${firstName} ${lastName}`,
         }).then(() => {
-          elements.registerSuccessMessage.textContent = "Registration successful! Redirecting..."
-          elements.registerSuccessMessage.style.display = "block"
+          // Create user profile in Firestore
+          import("./firestore.js").then((module) => {
+            const FirestoreService = module.default
 
-          // Redirect to index.html after 2 seconds
-          setTimeout(() => {
-            window.location.href = "index.html"
-          }, 2000)
+            FirestoreService.updateUserProfile({
+              firstName,
+              lastName,
+              displayName: `${firstName} ${lastName}`,
+              email,
+              phoneNumber: "",
+              address: {
+                street: "",
+                city: "",
+                area: "",
+                pinCode: "",
+                landmark: "",
+              },
+              createdAt: new Date().toISOString(),
+              lastLogin: new Date().toISOString(),
+            })
+              .then(() => {
+                elements.registerSuccessMessage.textContent = "Registration successful! Redirecting..."
+                elements.registerSuccessMessage.style.display = "block"
+
+                // Redirect to index.html after 2 seconds
+                setTimeout(() => {
+                  window.location.href = "index.html"
+                }, 2000)
+              })
+              .catch((error) => {
+                console.error("Error creating user profile:", error)
+                // Still redirect even if profile creation fails
+                elements.registerSuccessMessage.textContent = "Registration successful! Redirecting..."
+                elements.registerSuccessMessage.style.display = "block"
+
+                setTimeout(() => {
+                  window.location.href = "index.html"
+                }, 2000)
+              })
+          })
         })
       })
       .catch((error) => {

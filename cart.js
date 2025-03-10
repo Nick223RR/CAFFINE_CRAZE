@@ -79,6 +79,12 @@ const CartManager = {
     return cart.reduce((total, item) => total + item.price * item.quantity, 0)
   },
 
+  // Check if cart is empty
+  isCartEmpty: function () {
+    const cart = this.getCart()
+    return cart.length === 0 || this.getCartTotal() <= 0
+  },
+
   // Get total number of items in cart
   getItemCount: function () {
     const cart = this.getCart()

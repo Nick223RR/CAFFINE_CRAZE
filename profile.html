@@ -17,6 +17,7 @@
     <script src="bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
     <!-- Custom Stylesheet -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="order-styles.css">
     <title>My Profile - Caffeine Craze</title>
     <style>
         .profile-section {
@@ -206,29 +207,38 @@
             <div class="alert alert-danger" id="error-message" style="display: none;"></div>
             
             <div id="profile-content" style="display: none;">
-                <div class="profile-section">
-                    <div class="profile-header">
-                        <div class="profile-avatar" id="profile-avatar"></div>
-                        <div>
-                            <div class="profile-name" id="profile-name"></div>
-                            <div class="profile-email" id="profile-email  id="profile-name"></div>
-                            <div class="profile-email" id="profile-email"></div>
-                        </div>
-                    </div>
-                    
-                    <h3>Account Information</h3>
-                    <p>Member since: <span id="member-since"></span></p>
-                    
-                    <h3>Order History</h3>
-                    <div id="order-history">
-                        <p>No previous orders found.</p>
-                    </div>
-                    
-                    <div class="mt-4">
-                        <button id="logout-btn" class="login-button logout-button">Logout</button>
-                    </div>
-                </div>
+    <div class="profile-section">
+        <div class="profile-header">
+            <div class="profile-avatar" id="profile-avatar"></div>
+            <div>
+                <div class="profile-name" id="profile-name"></div>
+                <div class="profile-email" id="profile-email"></div>
             </div>
+        </div>
+        
+        <h3>Account Information</h3>
+        <p>Member since: <span id="member-since"></span></p>
+        
+        <h3>Order History</h3>
+        <div id="order-history">
+            <div class="text-center my-4" id="loading-orders">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p class="mt-2">Loading your orders...</p>
+            </div>
+            <div id="no-orders" style="display: none;">
+                <p>No previous orders found.</p>
+                <a href="product.html" class="btn btn-primary mt-2">Browse Menu</a>
+            </div>
+            <div id="orders-list"></div>
+        </div>
+        
+        <div class="mt-4">
+            <button id="logout-btn" class="login-button logout-button">Logout</button>
+        </div>
+    </div>
+</div>
             
             <div id="not-logged-in" style="display: none;">
                 <div class="profile-section text-center">
@@ -242,70 +252,172 @@
 
     <!-- Firebase Scripts -->
     <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-analytics.js";
-        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-analytics.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
+    import FirestoreService from "./firestore.js";
 
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyAQbW8GZYx8s1TClUiG7r711piLJFtrANA",
-            authDomain: "caffinecraze-93d3f.firebaseapp.com",
-            projectId: "caffinecraze-93d3f",
-            storageBucket: "caffinecraze-93d3f.firebasestorage.app",
-            messagingSenderId: "774090459612",
-            appId: "1:774090459612:web:28aa1e5d3a3de8d393e719",
-            measurementId: "G-Z5VTH06PF5"
-        };
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyAQbW8GZYx8s1TClUiG7r711piLJFtrANA",
+        authDomain: "caffinecraze-93d3f.firebaseapp.com",
+        projectId: "caffinecraze-93d3f",
+        storageBucket: "caffinecraze-93d3f.firebasestorage.app",
+        messagingSenderId: "774090459612",
+        appId: "1:774090459612:web:28aa1e5d3a3de8d393e719",
+        measurementId: "G-Z5VTH06PF5"
+    };
 
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-        const auth = getAuth(app);
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
 
-        // Check authentication state
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                // User is signed in
-                document.getElementById('profile-content').style.display = "block";
-                document.getElementById('not-logged-in').style.display = "none";
-                
-                // Display user info
-                const displayName = user.displayName || 'User';
-                const email = user.email;
-                const creationTime = new Date(user.metadata.creationTime).toLocaleDateString();
-                
-                // Set profile information
-                document.getElementById('profile-name').textContent = displayName;
-                document.getElementById('profile-email').textContent = email;
-                document.getElementById('member-since').textContent = creationTime;
-                
-                // Set avatar with initials
-                const initials = displayName.split(' ')
-                    .map(name => name.charAt(0))
-                    .join('')
-                    .toUpperCase();
-                document.getElementById('profile-avatar').textContent = initials;
-                
-            } else {
-                // User is not signed in
-                document.getElementById('profile-content').style.display = "none";
-                document.getElementById('not-logged-in').style.display = "block";
+    // Check authentication state
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            // User is signed in
+            document.getElementById('profile-content').style.display = "block";
+            document.getElementById('not-logged-in').style.display = "none";
+            
+            // Display user info
+            const displayName = user.displayName || 'User';
+            const email = user.email;
+            const creationTime = new Date(user.metadata.creationTime).toLocaleDateString();
+            
+            // Set profile information
+            document.getElementById('profile-name').textContent = displayName;
+            document.getElementById('profile-email').textContent = email;
+            document.getElementById('member-since').textContent = creationTime;
+            
+            // Set avatar with initials
+            const initials = displayName.split(' ')
+                .map(name => name.charAt(0))
+                .join('')
+                .toUpperCase();
+            document.getElementById('profile-avatar').textContent = initials;
+            
+            // Load order history
+            await loadOrderHistory();
+            
+        } else {
+            // User is not signed in
+            document.getElementById('profile-content').style.display = "none";
+            document.getElementById('not-logged-in').style.display = "block";
+        }
+    });
+
+    // Load order history from Firestore
+    async function loadOrderHistory() {
+        const loadingEl = document.getElementById('loading-orders');
+        const noOrdersEl = document.getElementById('no-orders');
+        const ordersListEl = document.getElementById('orders-list');
+        
+        try {
+            // Get orders from Firestore
+            const result = await FirestoreService.getUserOrders();
+            
+            // Hide loading indicator
+            loadingEl.style.display = 'none';
+            
+            if (!result.success) {
+                throw new Error(result.error || 'Failed to load orders');
             }
-        });
-
-        // Logout functionality
-        document.getElementById('logout-btn').addEventListener('click', function() {
-            signOut(auth).then(() => {
-                // Sign-out successful
-                window.location.href = "index.html";
-            }).catch((error) => {
-                // An error happened
-                document.getElementById('error-message').textContent = "Error signing out. Please try again.";
-                document.getElementById('error-message').style.display = "block";
+            
+            const orders = result.orders;
+            
+            if (orders.length === 0) {
+                // Show no orders message
+                noOrdersEl.style.display = 'block';
+                return;
+            }
+            
+            // Display orders
+            let ordersHTML = '';
+            
+            orders.forEach(order => {
+                const orderDate = new Date(order.createdAt).toLocaleDateString();
+                const orderTime = new Date(order.createdAt).toLocaleTimeString();
+                
+                let itemsHTML = '';
+                order.cart.forEach(item => {
+                    itemsHTML += `
+                        <div class="d-flex justify-content-between">
+                            <span>${item.name} x ${item.quantity}</span>
+                            <span>₹${item.price * item.quantity}</span>
+                        </div>
+                    `;
+                });
+                
+                ordersHTML += `
+                    <div class="order-history-item mb-3">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="mb-0">Order #${order.id.substring(0, 8)}</h5>
+                            <span class="badge bg-${getStatusBadgeColor(order.status)}">${order.status}</span>
+                        </div>
+                        <p class="text-muted">Placed on ${orderDate} at ${orderTime}</p>
+                        <hr>
+                        <div class="order-items mb-3">
+                            ${itemsHTML}
+                        </div>
+                        <div class="d-flex justify-content-between fw-bold">
+                            <span>Total:</span>
+                            <span>₹${order.total}</span>
+                        </div>
+                        <div class="mt-3">
+                            <p class="mb-1"><strong>Delivery Address:</strong></p>
+                            <p class="mb-0">${order.delivery.fullName}</p>
+                            <p class="mb-0">${order.delivery.streetAddress}</p>
+                            <p class="mb-0">${order.delivery.area}, ${order.delivery.city} - ${order.delivery.pinCode}</p>
+                        </div>
+                    </div>
+                `;
             });
+            
+            ordersListEl.innerHTML = ordersHTML;
+            
+        } catch (error) {
+            console.error('Error loading orders:', error);
+            loadingEl.style.display = 'none';
+            
+            // Show error message
+            ordersListEl.innerHTML = `
+                <div class="alert alert-danger">
+                    Failed to load order history. Please try again later.
+                </div>
+            `;
+        }
+    }
+    
+    // Helper function to get badge color based on order status
+    function getStatusBadgeColor(status) {
+        switch (status.toLowerCase()) {
+            case 'pending':
+                return 'warning';
+            case 'processing':
+                return 'info';
+            case 'delivered':
+                return 'success';
+            case 'cancelled':
+                return 'danger';
+            default:
+                return 'secondary';
+        }
+    }
+
+    // Logout functionality
+    document.getElementById('logout-btn').addEventListener('click', function() {
+        signOut(auth).then(() => {
+            // Sign-out successful
+            window.location.href = "index.html";
+        }).catch((error) => {
+            // An error happened
+            document.getElementById('error-message').textContent = "Error signing out. Please try again.";
+            document.getElementById('error-message').style.display = "block";
         });
-    </script>
+    });
+</script>
 </body>
 </html>
 
