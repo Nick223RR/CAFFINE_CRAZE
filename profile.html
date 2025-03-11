@@ -353,7 +353,7 @@
                 ordersHTML += `
                     <div class="order-history-item mb-3">
                         <div class="d-flex justify-content-between align-items-center mb-2">
-                            <h5 class="mb-0">Order #${order.id.substring(0, 8)}</h5>
+                            <h5 class="mb-0">Order #${order.orderId || order.id.substring(0, 8)}</h5>
                             <span class="badge bg-${getStatusBadgeColor(order.status)}">${order.status}</span>
                         </div>
                         <p class="text-muted">Placed on ${orderDate} at ${orderTime}</p>

@@ -2,11 +2,10 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js"
 import {
   getFirestore,
-  collection,
-  addDoc,
   doc,
   setDoc,
   getDoc,
+  runTransaction,
 } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js"
 import { getAuth } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js"
 
@@ -26,19 +25,60 @@ const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
 const auth = getAuth(app)
 
+// Counter document reference for sequential order IDs
+const counterDocRef = doc(db, "counters", "orders")
+
 // Firestore operations
 const FirestoreService = {
-  // Save order to Firestore
+  // Get next sequential order ID using a transaction
+  getNextOrderId: async () => {
+    try {
+      // Use a transaction to ensure atomic read-write operation
+      const nextId = await runTransaction(db, async (transaction) => {
+        const counterDoc = await transaction.get(counterDocRef)
+
+        // If counter document doesn't exist, create it with initial value
+        if (!counterDoc.exists()) {
+          // Start from 1 for new systems
+          transaction.set(counterDocRef, { value: 1 })
+          return 1
+        }
+
+        // Get current counter value and increment it
+        const currentValue = counterDoc.data().value
+        const nextValue = currentValue + 1
+
+        // Update the counter with new value
+        transaction.update(counterDocRef, { value: nextValue })
+
+        return nextValue
+      })
+
+      return nextId
+    } catch (error) {
+      console.error("Error getting next order ID:", error)
+      throw error
+    }
+  },
+
+  // Save order to Firestore with sequential ID
   saveOrder: async (orderData) => {
     try {
-      // Add timestamp to order
+      // Get next sequential order ID
+      const orderId = await FirestoreService.getNextOrderId()
+
+      // Add timestamp and sequential ID to order
       const orderWithTimestamp = {
         ...orderData,
+        orderId: orderId, // Add sequential numeric ID
         createdAt: new Date().toISOString(),
       }
 
-      // Add order to 'orders' collection
-      const docRef = await addDoc(collection(db, "orders"), orderWithTimestamp)
+      // Create document with the sequential ID as string
+      const orderDocRef = doc(db, "orders", orderId.toString())
+
+      // Set the document with the order data
+      await setDoc(orderDocRef, orderWithTimestamp)
 
       // If user is logged in, add order reference to user's orders
       const user = auth.currentUser
@@ -53,7 +93,7 @@ const FirestoreService = {
           // User exists, update orders array
           const userData = userDoc.data()
           const orders = userData.orders || []
-          orders.push(docRef.id)
+          orders.push(orderId.toString())
 
           await setDoc(userDocRef, { orders }, { merge: true })
         } else {
@@ -62,13 +102,13 @@ const FirestoreService = {
             email: user.email,
             displayName: user.displayName || "",
             photoURL: user.photoURL || "",
-            orders: [docRef.id],
+            orders: [orderId.toString()],
             createdAt: new Date().toISOString(),
           })
         }
       }
 
-      return { success: true, orderId: docRef.id }
+      return { success: true, orderId: orderId }
     } catch (error) {
       console.error("Error saving order:", error)
       return { success: false, error: error.message }
